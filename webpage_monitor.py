@@ -30,10 +30,20 @@ def monitor_target(page):
         target_pos = index + len(target_flag)
         return page[target_pos:target_pos + target_length]
 
+def isnumber(string):
+    ''' return True if string contains an integer or float '''
+    if string.isdigit():
+        return True
+    else:
+        try:
+            float(string)
+            return True
+        except ValueError:
+            return False
+
 def equal(origin_value, new_value):
     ''' return whether origin_value and new_value are equal '''
-    if (isinstance(origin_value, int) and isinstance(new_value, int)) \
-    or (isinstance(origin_value, float) and isinstance(new_value, float)):
+    if isnumber(origin_value) and isnumber(new_value):
         if abs(float(origin_value) - float(new_value)) <= target_tolerance:
             return True
         else:
@@ -67,7 +77,8 @@ def monitor():
 
 
 if __name__ == "__main__":
-        monitor()
+    monitor()
+
 
 
 
